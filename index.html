@@ -16,9 +16,10 @@
       <button onclick="throw new Error('me')">Click me</button>
     </main>
     <script>
-      window.onerror = function (message, source, lineno, colno, error) {
-        console.log("window.onerror", message, source, lineno, colno, error);
-        return true;
+      const e = window.onerror;
+      window.onerror = function (...args) {
+        console.log("window.onerror", ...args);
+        return e(...args);
       };
     </script>
     <script
@@ -45,8 +46,12 @@
           console.log(event);
           return event;
         });
+
+        const h = {};
+        h.lol();
       });
     </script>
+    <script></script>
     <script src="index.js"></script>
   </body>
 </html>
