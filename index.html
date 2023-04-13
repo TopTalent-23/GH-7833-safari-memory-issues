@@ -15,6 +15,12 @@
       >
       <button onclick="throw new Error('me')">Click me</button>
     </main>
+    <script>
+      window.onerror = function (message, source, lineno, colno, error) {
+        console.log("window.onerror", message, source, lineno, colno, error);
+        return true;
+      };
+    </script>
     <script
       src="https://js.sentry-cdn.com/03ff0344693f45f49564941b4d9cda11.min.js"
       crossorigin="anonymous"
@@ -26,7 +32,7 @@
         cat.fn();
       }
 
-      document.addEventListener("DOMContentLoaded", me);
+      me();
     </script>
     <script>
       Sentry.onLoad(function () {
