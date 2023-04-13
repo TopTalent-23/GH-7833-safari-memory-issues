@@ -1,0 +1,9 @@
+{
+  "name": "GH-7833-safari-memory-issues",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>GH 7833 Reproduction</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <main>
+      <h1>GH 7833 Reproduction</h1>
+      <a src="https://github.com/getsentry/sentry-javascript/issues/7833"
+        >https://github.com/getsentry/sentry-javascript/issues/7833</a
+      >
+      <button onclick="throw new Error('me')">Click me</button>
+    </main>
+    <script
+      src="https://js.sentry-cdn.com/03ff0344693f45f49564941b4d9cda11.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      function me() {
+        const cat = {};
+
+        cat.fn();
+      }
+
+      document.addEventListener("DOMContentLoaded", me);
+    </script>
+    <script>
+      Sentry.onLoad(function () {
+        Sentry.init({
+          debug: true,
+          release: "1.0.0",
+        });
+
+        Sentry.addGlobalEventProcessor(function (event) {
+          console.log(event);
+          return event;
+        });
+      });
+    </script>
+    <script src="index.js"></script>
+  </body>
+</html>
