@@ -1,39 +1,31 @@
-[Safari Memory Issue] Memory Spikes and Crashes the browser
+# Safari Memory Issue: Memory Spikes and Browser Crashes
 
-How do you use Sentry?
-Sentry Saas (sentry.io)
+## How to Use Sentry
+- **Sentry SaaS**: [sentry.io](https://sentry.io)
 
-Which SDK are you using? If you use the CDN bundles, please specify the exact bundle (e.g. bundle.tracing.min.js) in your SDK setup.
-Sentry Browser CDN bundle
+## SDK Information
+- **SDK Type**: Sentry Browser CDN bundle
+- **SDK Version**: n/a
+- **Framework Version**: n/a
 
-SDK Version
-n/a
+## Link to Sentry Event
+- **Event Link**: n/a
 
-Framework Version
-n/a
+## SDK Setup
+- **Response**: No response
 
-Link to Sentry event
-n/a
+## Steps to Reproduce
+Certain implementations of the JS bundle loaded from a CDN cause the SDK to crash Safari. Anecdotal reports indicate the issue stems from circular error handler calls, resulting in a call stack that oscillates between the error logging JavaScript and the Sentry SDK.
 
-SDK Setup
-No response
+This issue has been replicated on the following Safari versions when using the CDN link:
+- [https://browser.sentry-cdn.com/6.19.7/bundle.min.js](https://browser.sentry-cdn.com/6.19.7/bundle.min.js)
+  - **Version 14.1.2** (16611.3.10.1.16)
+  - **Version 16.3** (18614.4.6.1.6)
 
-Steps to Reproduce
-For certain implementations of the JS bundle loaded from a CDN, the SDK will crash Safari.
+For a live reproduction example, please refer to the linked Jira ticket.
 
-Annecdotally the following has been reported:
+## Expected Result
+The SDK should not consume excessive memory or crash the browser.
 
-[...] seem to have isolated the issue down to circular error handler calls, and the call stack seems to be bouncing between [the] error logging JS and the Sentry SDK
-
-This has been replicated on the following Safari versions when using https://browser.sentry-cdn.com/6.19.7/bundle.min.js:
-
-Version 14.1.2 (16611.3.10.1.16)
-Version 16.3 (18614.4.6.1.6)
-
-Please see linked example in synced Jira ticket for a live reproduction.
-
-Expected Result
-SDK does not consume memory and crash the browser.
-
-Actual Result<br/>
-<img width="511" alt="231545453-f60a5862-4ac0-440a-ac08-08ba09c4dca6" src="https://github.com/user-attachments/assets/cd7f8b24-6914-4c02-9aa5-6e068a92ef5e" />
+## Actual Result
+![Memory Issue Screenshot](https://github.com/user-attachments/assets/cd7f8b24-6914-4c02-9aa5-6e068a92ef5e)
